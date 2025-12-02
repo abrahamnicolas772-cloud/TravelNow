@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelNow - Agence de Voyage Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== VARIABLES & RESET ===== */
+        :root {
+            --primary: #00c2d1;
+            --primary-dark: #00a0ad;
+            --primary-light: #e9fafd;
+            --secondary: #003d66;
+            --accent: #ff6b35;
+            --light: #ffffff;
+            --dark: #1a1a1a;
+            --gray: #6c757d;
+            --gray-light: #f8f9fa;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background: #e55a2b;
+        }
+
+        .btn-lg {
+            padding: 20px 48px;
+            font-size: 1.1rem;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            margin-right: 40px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--secondary);
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            cursor: pointer;
+            padding: 10px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--primary-light);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 180px 0 120px;
+            background: linear-gradient(rgba(0, 60, 90, 0.7), rgba(0, 150, 180, 0.5)), 
+                        url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 50px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 100px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        /* ===== DESTINATIONS ===== */
+        .destinations {
+            background: var(--gray-light);
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .destination-image {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .destination-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .destination-card:hover .destination-image img {
+            transform: scale(1.1);
+        }
+
+        .destination-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+
+        .destination-content {
+            padding: 30px 25px;
+        }
+
+        .destination-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .destination-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .destination-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* ===== OFFERS ===== */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--primary-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+
+        .offer-card.popular::before {
+            content: 'POPULAIRE';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--primary);
+            color: white;
+            padding: 8px 35px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+        }
+
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .offer-card.popular:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .offer-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .offer-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .offer-card p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .offer-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .offer-period {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            background: var(--gray-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--primary-light);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            background: white;
+        }
+
+        .testimonials-slider {
+            max-width: 900px;
+            margin: 60px auto 0;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: var(--primary-light);
+            border-radius: var(--radius-lg);
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 194, 209, 0.3);
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            line-height: 1.8;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+            font-family: serif;
+        }
+
+        .testimonial-text::before {
+            top: -20px;
+            left: 0;
+        }
+
+        .testimonial-text::after {
+            bottom: -40px;
+            right: 0;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
+        }
+
+        .contact-details {
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: var(--radius);
+            background: var(--primary-light);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 50px 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--primary-light);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--primary-light);
+            border-radius: var(--radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 194, 209, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 80px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: white;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 40px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 30px 0;
+                box-shadow: var(--shadow-hover);
+                gap: 0;
+                z-index: 1000;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-link {
+                display: block;
+                padding: 20px 0;
+                text-align: center;
+                font-size: 1.1rem;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .offer-card.popular {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .hero-stats {
+                margin-top: 80px;
+                gap: 40px;
+            }
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            section {
+                padding: 80px 0;
+            }
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero-stats {
+                gap: 30px;
+            }
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .btn {
+                padding: 14px 30px;
+                font-size: 0.95rem;
+            }
+            .btn-lg {
+                padding: 18px 40px;
+            }
+            .destination-card,
+            .offer-card,
+            .service-card,
+            .testimonial-card {
+                padding: 30px 20px;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <div class="logo-text">Travel<span>Now</span></div>
+            </a>
+            
+            <nav class="nav">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+                    <li><a href="#destinations">Destinations</a></li>
+                    <li><a href="#offers">Offres</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <a href="#destinations" class="btn">Réserver</a>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i> Meilleure Agence 2024
+                </div>
+                <h1>Explorez le Monde Maintenant</h1>
+                <p>Découvrez les plus belles destinations avec nos offres exclusives. Voyagez en toute sérénité avec TravelNow.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#destinations" class="btn btn-lg">
+                        <i class="fas fa-search"></i> Explorer les Destinations
+                    </a>
+                    <a href="#offers" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-percent"></i> Voir les Promotions
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="stat-number">15K+</div>
+                        <div class="stat-text">Voyageurs Satisfaits</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-text">Destinations</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-text">Support</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-text">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Destinations Populaires</h2>
+                <p>Découvrez nos destinations les plus prisées à travers le monde</p>
+            </div>
+            
+            <div class="destinations-grid">
+                <div class="destination-card fade-in">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maldives">
+                        <div class="destination-badge">Plage</div>
+                    </div>
+                    <div class="destination-content">
+                        <h3>Maldives</h3>
+                        <p>Plages de sable blanc, eaux turquoise et bungalows sur pilotis pour un séjour paradisiaque.</p>
+                        <div class="destination-price">
+                            <div>
+                                <div class="price">$1,299</div>
+                                <small>7 jours / 6 nuits</small>
+                            </div>
+                            <a href="#" class="btn">Détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card fade-in">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Paris">
+                        <div class="destination-badge">Culture</div>
+                    </div>
+                    <div class="destination-content">
+                        <h3>Paris</h3>
+                        <p>La ville lumière, ses monuments emblématiques, sa gastronomie et son romantisme légendaire.</p>
+                        <div class="destination-price">
+                            <div>
+                                <div class="price">$799</div>
+                                <small>5 jours / 4 nuits</small>
+                            </div>
+                            <a href="#" class="btn">Détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card fade-in">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tokyo">
+                        <div class="destination-badge">Aventure</div>
+                    </div>
+                    <div class="destination-content">
+                        <h3>Tokyo</h3>
+                        <p>Mélange unique de traditions ancestrales et de technologies futuristes dans la mégalopole japonaise.</p>
+                        <div class="destination-price">
+                            <div>
+                                <div class="price">$1,099</div>
+                                <small>8 jours / 7 nuits</small>
+                            </div>
+                            <a href="#" class="btn">Détails</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offers Section -->
+    <section class="offers" id="offers">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Offres du Mois</h2>
+                <p>Profitez de nos promotions exclusives pour des voyages inoubliables</p>
+            </div>
+            
+            <div class="offers-grid">
+                <div class="offer-card fade-in">
+                    <div class="offer-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Dubai</h3>
+                    <p>Vol + Hôtel 5★ avec vue sur Burj Khalifa. Petit-déjeuner inclus et transfert aéroport.</p>
+                    <div class="offer-price">$799</div>
+                    <div class="offer-period">par personne, 5 jours</div>
+                    <a href="#contact" class="btn">Réserver</a>
+                </div>
+                
+                <div class="offer-card popular fade-in">
+                    <div class="offer-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3>New York</h3>
+                    <p>Séjour 6 jours dans la ville qui ne dort jamais. Visite des principaux monuments inclus.</p>
+                    <div class="offer-price">$650</div>
+                    <div class="offer-period">par personne, 6 jours</div>
+                    <a href="#contact" class="btn btn-accent">Réserver</a>
+                </div>
+                
+                <div class="offer-card fade-in">
+                    <div class="offer-icon">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <h3>Santorini</h3>
+                    <p>Vue imprenable sur la mer Égée depuis votre hôtel. Couchers de soleil inoubliables garantis.</p>
+                    <div class="offer-price">$720</div>
+                    <div class="offer-period">par personne, 7 jours</div>
+                    <a href="#contact" class="btn">Réserver</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Nos Services</h2>
+                <p>Une expérience de voyage complète et sans soucis avec TravelNow</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Billets d'Avion</h3>
+                    <p>Meilleurs prix garantis sur les vols internationaux et domestiques.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h3>Hébergement</h3>
+                    <p>Large choix d'hôtels, resorts et locations de vacances dans le monde entier.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Location Voiture</h3>
+                    <p>Véhicules de qualité avec assurance complète et kilométrage illimité.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Assistance 24/7</h3>
+                    <p>Support disponible à tout moment pendant votre voyage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Témoignages</h2>
+                <p>Ce que disent nos voyageurs satisfaits</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        TravelNow a organisé notre voyage de noces aux Maldives. Tout était parfait : l'hôtel, les activités, le transfert. Un service impeccable du début à la fin !
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sophie Martin</h4>
+                            <p>Voyage de noces aux Maldives</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Contactez-nous</h2>
+                <p>Prêt à planifier votre prochain voyage ? Notre équipe est à votre disposition</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <h2>Planifions Votre Aventure Ensemble</h2>
+                    <p>Notre équipe d'experts est disponible pour vous conseiller et organiser le voyage de vos rêves.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Téléphone</h4>
+                                <p>+33 1 23 45 67 89</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>contact@travelnow.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Adresse</h4>
+                                <p>123 Avenue des Voyages, 75001 Paris</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form fade-in">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom Complet</label>
+                            <input type="text" id="name" class="form-control" placeholder="Votre nom" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Adresse Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="votre@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="destination">Destination Intéressée</label>
+                            <select id="destination" class="form-control" required>
+                                <option value="">Choisissez une destination</option>
+                                <option value="maldives">Maldives</option>
+                                <option value="paris">Paris</option>
+                                <option value="tokyo">Tokyo</option>
+                                <option value="dubai">Dubai</option>
+                                <option value="newyork">New York</option>
+                                <option value="santorini">Santorini</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Décrivez votre projet de voyage..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Envoyer la Demande
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TravelNow</h3>
+                    <p>Votre partenaire de confiance pour des voyages inoubliables. Depuis 2010, nous créons des expériences uniques à travers le monde.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Destinations</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Europe</a></li>
+                        <li><a href="#">Asie</a></li>
+                        <li><a href="#">Amériques</a></li>
+                        <li><a href="#">Afrique</a></li>
+                        <li><a href="#">Océanie</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Vols</a></li>
+                        <li><a href="#">Hôtels</a></li>
+                        <li><a href="#">Circuits</a></li>
+                        <li><a href="#">Croisières</a></li>
+                        <li><a href="#">Assurance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+33123456789">+33 1 23 45 67 89</a></li>
+                        <li><a href="mailto:contact@travelnow.com">contact@travelnow.com</a></li>
+                        <li><a href="#">123 Avenue des Voyages</a></li>
+                        <li><a href="#">75001 Paris, France</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 TravelNow - Tous droits réservés. | <a href="#">Politique de confidentialité</a> | <a href="#">Conditions générales</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Set active nav link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const destination = document.getElementById('destination').value;
+            
+            if (name && destination) {
+                alert(`Merci ${name} ! Votre demande pour ${destination} a été envoyée. Nous vous contacterons dans les plus brefs délais.`);
+                contactForm.reset();
+            } else {
+                alert('Veuillez remplir tous les champs obligatoires');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements to animate
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
